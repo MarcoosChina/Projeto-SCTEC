@@ -13,10 +13,11 @@ import { CursosActions } from './cursos.actions';
 export const carregarCursos = createEffect(
   (actions$ = inject(Actions), cursoService = inject(CursoService)) =>
     actions$.pipe(
-      ofType(CursosActions.carregar),                                   // 1) só reage a [Cursos] Carregar
+      ofType(CursosActions.carregar), // 1) só reage a [Cursos] Carregar
       exhaustMap(() =>
-        cursoService.listar().pipe(                                      // 2) chama a API
-          map((cursos) => CursosActions.carregarSucesso({ cursos })),    // 3a) deu certo
+        // 2) chama a API (exhaustMap ignora novos pedidos enquanto o atual não termina)
+        cursoService.listar().pipe(
+          map((cursos) => CursosActions.carregarSucesso({ cursos })), // 3a) deu certo
           catchError(() => of(CursosActions.carregarFalha({ erro: 'Não foi possível carregar os cursos.' }))), // 3b) deu errado
         ),
       ),

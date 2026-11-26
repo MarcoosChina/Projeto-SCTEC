@@ -31,9 +31,6 @@ export class ListaCursos implements OnInit {
   }
 
   // ESCRITA: a página só AVISA o que aconteceu
-  // TODO 6 (DISPATCH) - parte A: a página só AVISA a Store. Complete os dois métodos:
-  //   inscrever -> this.store.dispatch(CursosActions.inscrever({ cursoId }));
-  //   cancelar  -> this.store.dispatch(CursosActions.cancelarInscricao({ cursoId }));
   inscrever(cursoId: number): void {
     this.store.dispatch(CursosActions.inscrever({ cursoId }));
   }
