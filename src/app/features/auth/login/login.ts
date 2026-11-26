@@ -46,32 +46,36 @@ export class Login {
     this.form.setValue({ username: usuario.username, password: usuario.password });
   }
 
-  entrar(): void {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-    // TODO 2 (PÁGINA DE LOGIN): chame o AuthService e trate os dois caminhos (sucesso e erro):
-      this.carregando.set(true);
-      this.erro.set('');
-      this.auth.login(this.form.getRawValue()).subscribe({
-        next: (usuario) => {
-          this.carregando.set(false);
-          this.snackBar.open(`Bem-vindo(a), ${usuario.nome}!`, 'OK', { duration: 3000 });
-          const destino = this.route.snapshot.queryParamMap.get('returnUrl') ?? '/inscricoes';
-          this.router.navigateByUrl(destino);
-        },
-        error: (erro: HttpErrorResponse) => {
-          this.carregando.set(false);
-          this.erro.set(mensagemDeErro(erro.status));
-        },
-      });
-<<<<<<< HEAD
-    //this.erro.set('TODO 2: a página de login ainda não chama o AuthService.');
-=======
-    // this.erro.set('TODO 2: a página de login ainda não chama o AuthService.');
->>>>>>> b959160e58a756d1d3d0b94ac5106511f7d2a137
+entrar(): void {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    return;
   }
+
+  // TODO 2 (PÁGINA DE LOGIN): chame o AuthService e trate os dois caminhos (sucesso e erro):
+  this.carregando.set(true);
+  this.erro.set('');
+
+  this.auth.login(this.form.getRawValue()).subscribe({
+    next: (usuario) => {
+      this.carregando.set(false);
+      this.snackBar.open(`Bem-vindo(a), ${usuario.nome}!`, 'OK', {
+        duration: 3000,
+      });
+
+      const destino =
+        this.route.snapshot.queryParamMap.get('returnUrl') ?? '/inscricoes';
+
+      this.router.navigateByUrl(destino);
+    },
+    error: (erro: HttpErrorResponse) => {
+      this.carregando.set(false);
+      this.erro.set(mensagemDeErro(erro.status));
+    },
+  });
+}    //this.erro.set('TODO 2: a página de login ainda não chama o AuthService.');
+    // this.erro.set('TODO 2: a página de login ainda não chama o AuthService.');
+  
 }
 
 // Cada status HTTP conta uma história diferente:

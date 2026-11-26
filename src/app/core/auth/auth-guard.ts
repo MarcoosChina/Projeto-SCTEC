@@ -13,17 +13,13 @@ export const authGuard: CanActivateFn = (_route, state) => {
   const router = inject(Router);
 
   // TODO 4 (AUTH GUARD) - parte A: apague o "return true" provisório e escreva:
-<<<<<<< HEAD
   if (auth.estaLogado()) {
     return true;
   }
-  return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
-=======
-    if (auth.estaLogado()) {
-      return true;
-    }
-    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
->>>>>>> b959160e58a756d1d3d0b94ac5106511f7d2a137
+
+  return router.createUrlTree(['/login'], {
+    queryParams: { returnUrl: state.url },
+  });
 };
 
 // AUTORIZAÇÃO: "você tem o PERFIL certo?"
@@ -35,13 +31,20 @@ export function perfilGuard(perfil: Perfil): CanMatchFn {
     const router = inject(Router);
 
     // TODO 5 (PERFIL GUARD) - parte A: apague o "return true" provisório e escreva as 3 regras:
-      if (!auth.estaLogado()) {                                    // 1) não logado -> login
-        const url = '/' + segments.map((s) => s.path).join('/');
-        return router.createUrlTree(['/login'], { queryParams: { returnUrl: url } });
-      }
-      if (auth.usuario()?.perfil === perfil) {                     // 2) perfil certo -> entra
-        return true;
-      }
-      return router.createUrlTree(['/acesso-negado']);             // 3) perfil errado -> 403
+    if (!auth.estaLogado()) {
+      // 1) não logado -> login
+      const url = '/' + segments.map((s) => s.path).join('/');
+      return router.createUrlTree(['/login'], {
+        queryParams: { returnUrl: url },
+      });
+    }
+
+    if (auth.usuario()?.perfil === perfil) {
+      // 2) perfil certo -> entra
+      return true;
+    }
+
+    return router.createUrlTree(['/acesso-negado']);
+    // 3) perfil errado -> 403
   };
 }
