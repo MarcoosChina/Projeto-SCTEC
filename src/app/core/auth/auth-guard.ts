@@ -13,10 +13,17 @@ export const authGuard: CanActivateFn = (_route, state) => {
   const router = inject(Router);
 
   // TODO 4 (AUTH GUARD) - parte A: apague o "return true" provisório e escreva:
+<<<<<<< HEAD
   if (auth.estaLogado()) {
     return true;
   }
   return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
+=======
+    if (auth.estaLogado()) {
+      return true;
+    }
+    return router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
+>>>>>>> b959160e58a756d1d3d0b94ac5106511f7d2a137
 };
 
 // AUTORIZAÇÃO: "você tem o PERFIL certo?"

@@ -21,10 +21,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    // TODO 3 - parte B: registre o interceptor. Troque a linha abaixo por:
-    provideHttpClient(withInterceptors([authInterceptor])),
     provideHttpClient(),
-
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    provideNgxMask(),
 
     // NgRx: a Store (o "cofre" central), a fatia "cursos" e os effects
     provideStore(),

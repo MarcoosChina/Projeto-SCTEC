@@ -66,7 +66,11 @@ export class Login {
           this.erro.set(mensagemDeErro(erro.status));
         },
       });
+<<<<<<< HEAD
     //this.erro.set('TODO 2: a página de login ainda não chama o AuthService.');
+=======
+    // this.erro.set('TODO 2: a página de login ainda não chama o AuthService.');
+>>>>>>> b959160e58a756d1d3d0b94ac5106511f7d2a137
   }
 }
 
