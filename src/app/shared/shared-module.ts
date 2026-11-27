@@ -4,7 +4,7 @@
 // Semana 7: + MatProgressSpinnerModule (indicador de carregamento).
 // Repare: MatButtonModule, MatCardModule... TAMBÉM são NgModules. A ideia da Aula 1 aparece de novo!
 import { NgModule } from '@angular/core';
-import { DatePipe, UpperCasePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage, UpperCasePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -39,6 +39,7 @@ const COMPARTILHADOS = [
   FormsModule,
   ReactiveFormsModule,
   RouterLink,
+  NgOptimizedImage,
   NgxMaskDirective, // biblioteca de terceiros: atributo mask="..."
   ...MATERIAL,
 ];

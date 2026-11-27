@@ -2,7 +2,7 @@
 // Semana 7 · Aula 1: os dados NÃO vêm mais do service direto. A página:
 //   LÊ da Store com selectSignal(selector)   -> devolve um signal (igual aos da Semana 4)
 //   AVISA a Store com dispatch(action)        -> o reducer/effect fazem o resto
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CursosActions } from '@core/state/cursos.actions';
 import { cursosFeature } from '@core/state/cursos.feature';
@@ -39,7 +39,9 @@ export class ListaCursos implements OnInit {
     this.store.dispatch(CursosActions.cancelarInscricao({ cursoId }));
   }
 
+  protected readonly inscritosSet = computed(() => new Set(this.inscritos()));
   estaInscrito(cursoId: number): boolean {
+    console.count('estaInscrito() chamado');
     return this.inscritos().includes(cursoId);
   }
 
